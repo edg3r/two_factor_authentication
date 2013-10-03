@@ -23,6 +23,11 @@ module Devise
       def max_login_attempts?
         second_factor_attempts_count >= self.class.max_login_attempts
       end
+
+      def increment_attempts_count
+        self.second_factor_attempts_count += 1
+        save
+      end
     end
   end
 end

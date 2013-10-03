@@ -14,8 +14,7 @@ class Devise::TwoFactorAuthenticationController < DeviseController
       redirect_to stored_location_for(resource_name) || :root
       resource.update_attribute(:second_factor_attempts_count, 0)
     else
-      resource.second_factor_attempts_count += 1
-      resource.save
+      resource.increment_attempts_count
       set_flash_message :error, :attempt_failed
       if resource.max_login_attempts?
         sign_out(resource)
